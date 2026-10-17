@@ -4892,6 +4892,153 @@
           grid-area: span 1 / span 1 / span 1 / span 1;
         }
       }
+
+      /* Launch Announcement & Countdown Timer Styles */
+      @keyframes ttFadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes pulseDot {
+        0% {
+          transform: scale(0.95);
+          box-shadow: 0 0 0 0 rgba(255, 125, 0, 0.7);
+        }
+        70% {
+          transform: scale(1);
+          box-shadow: 0 0 0 6px rgba(255, 125, 0, 0);
+        }
+        100% {
+          transform: scale(0.95);
+          box-shadow: 0 0 0 0 rgba(255, 125, 0, 0);
+        }
+      }
+
+      .launch-countdown-block {
+        margin-top: 2rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1.15rem;
+        animation: ttFadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.35s both;
+      }
+
+      .launch-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.3rem 0.8rem;
+        background: rgba(255, 125, 0, 0.08);
+        border: 1px solid rgba(255, 125, 0, 0.22);
+        border-radius: 9999px;
+        font-family: var(--primary-font, Raleway, sans-serif);
+        font-size: 0.75rem;
+        font-weight: 700;
+        color: var(--primary-orange, #ff7d00);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        width: fit-content;
+        margin-bottom: 0.45rem;
+      }
+
+      .launch-pulse-dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background-color: var(--primary-orange, #ff7d00);
+        animation: pulseDot 2s infinite;
+      }
+
+      .launch-announcement-text {
+        font-family: var(--primary-font, Raleway, sans-serif);
+        font-size: clamp(1.4rem, 2.5vw, 1.95rem);
+        font-weight: 800;
+        color: #101828;
+        line-height: 1.25;
+        letter-spacing: -0.02em;
+      }
+
+      .launch-date-accent {
+        color: var(--primary-orange, #ff7d00);
+        white-space: nowrap;
+      }
+
+      .countdown-card-wrapper {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.65rem;
+        flex-wrap: wrap;
+        padding-top: 0.25rem;
+      }
+
+      .countdown-unit-box {
+        background: #ffffff;
+        border: 1px solid rgba(16, 24, 40, 0.09);
+        box-shadow: 0 2px 10px -2px rgba(16, 24, 40, 0.06), 0 1px 3px -1px rgba(16, 24, 40, 0.04);
+        border-radius: 12px;
+        padding: 0.65rem 0.9rem;
+        min-width: 62px;
+        text-align: center;
+        transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease, border-color 0.2s ease;
+      }
+
+      .countdown-unit-box:hover {
+        transform: translateY(-2px);
+        border-color: rgba(255, 125, 0, 0.4);
+        box-shadow: 0 8px 18px -4px rgba(255, 125, 0, 0.12), 0 2px 6px -1px rgba(16, 24, 40, 0.04);
+      }
+
+      .countdown-num {
+        font-family: var(--primary-font, Raleway, sans-serif);
+        font-size: 1.55rem;
+        font-weight: 800;
+        color: #101828;
+        line-height: 1.1;
+        font-variant-numeric: tabular-nums;
+      }
+
+      .countdown-lbl {
+        font-family: var(--secondary-font, "Open Sans", sans-serif);
+        font-size: 0.65rem;
+        font-weight: 700;
+        color: #667085;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        margin-top: 0.25rem;
+      }
+
+      .countdown-divider {
+        font-family: var(--primary-font, Raleway, sans-serif);
+        font-size: 1.35rem;
+        font-weight: 700;
+        color: #d0d5dd;
+        align-self: flex-start;
+        margin-top: 0.65rem;
+        line-height: 1;
+        user-select: none;
+      }
+
+      @media screen and (max-width: 479px) {
+        .countdown-card-wrapper {
+          gap: 0.45rem;
+        }
+        .countdown-unit-box {
+          min-width: 52px;
+          padding: 0.5rem 0.65rem;
+        }
+        .countdown-num {
+          font-size: 1.3rem;
+        }
+        .countdown-divider {
+          font-size: 1.1rem;
+          margin-top: 0.5rem;
+        }
+      }
     </style>
     <link href="https://fonts.googleapis.com" rel="preconnect" />
     <link
@@ -5015,6 +5162,40 @@
                     online experience is arriving soon.
                   </div>
                 </div>
+
+                <div class="launch-countdown-block">
+                  <div class="launch-announcement-wrapper">
+                    <div class="launch-badge">
+                      <span class="launch-pulse-dot"></span>
+                      <span>Coming Soon</span>
+                    </div>
+                    <div class="launch-announcement-text">
+                      We will be launching on <span class="launch-date-accent">25th OCT 2026</span>.
+                    </div>
+                  </div>
+                  <div class="countdown-card-wrapper">
+                    <div class="countdown-unit-box">
+                      <div class="countdown-num" id="cd-days">00</div>
+                      <div class="countdown-lbl">Days</div>
+                    </div>
+                    <div class="countdown-divider">:</div>
+                    <div class="countdown-unit-box">
+                      <div class="countdown-num" id="cd-hours">00</div>
+                      <div class="countdown-lbl">Hours</div>
+                    </div>
+                    <div class="countdown-divider">:</div>
+                    <div class="countdown-unit-box">
+                      <div class="countdown-num" id="cd-minutes">00</div>
+                      <div class="countdown-lbl">Min</div>
+                    </div>
+                    <div class="countdown-divider">:</div>
+                    <div class="countdown-unit-box">
+                      <div class="countdown-num" id="cd-seconds">00</div>
+                      <div class="countdown-lbl">Sec</div>
+                    </div>
+                  </div>
+                </div>
+
                 <div class="uui-space-large"></div>
               </div>
               <div class="uui-heroheader03_image-wrapper">
@@ -5129,5 +5310,39 @@
       src="https://wubflow-shield.nocodexport.dev/6942e8159ae6a671d9ee2482/js/webflow.7d8f472b.0f75284f8af37bb6.js"
       type="text/javascript"
     ></script>
+    <script>
+      (function () {
+        var targetDate = new Date("2026-10-25T00:00:00").getTime();
+
+        function updateCountdown() {
+          var now = new Date().getTime();
+          var distance = targetDate - now;
+
+          if (distance < 0) {
+            distance = 0;
+          }
+
+          var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+          var hours = Math.floor(
+            (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+          );
+          var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+          var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+          var daysEl = document.getElementById("cd-days");
+          var hoursEl = document.getElementById("cd-hours");
+          var minEl = document.getElementById("cd-minutes");
+          var secEl = document.getElementById("cd-seconds");
+
+          if (daysEl) daysEl.textContent = String(days).padStart(2, "0");
+          if (hoursEl) hoursEl.textContent = String(hours).padStart(2, "0");
+          if (minEl) minEl.textContent = String(minutes).padStart(2, "0");
+          if (secEl) secEl.textContent = String(seconds).padStart(2, "0");
+        }
+
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+      })();
+    </script>
   </body>
 </html>
